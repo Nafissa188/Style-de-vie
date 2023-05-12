@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-header">
+        <h3 style="float:left" class="card-title">Liste  des déclinaisons</h3>
+        <a style="float:right" data-title="Ajouter une déclinaison" data-url="{{ path('supplier_productattribute_new', {'id': product.id}) }}"  class="addEditDelinaison btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un produit</a>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table data-url="{{ path('supplier_ajax_product_attribut_all', {'id': product.id}) }}" id="products-attributes-datatable" class="projects table table-bordered table-striped dataTable dtr-inline table-responsive-lg">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th >Référence</th>
+                    <th >prix</th>
+                    <th >Quantité</th>
+                    <th>Par defaut</th>
+                    <th >EAN13</th>
+                    <th >Upc</th>
+                    <th >Isbn</th>
+                    <th >Mpn</th>
+                    <th >Slug</th>
+                    <th >Attributs</th>
+                    <th >Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- /.card -->

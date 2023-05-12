@@ -1,0 +1,91 @@
+{{ form_start(form) }}
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.firstName) }}
+            <label for="name">{{ form_label(form.firstName) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.firstName) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.lastName) }}
+            <label for="name">{{ form_label(form.lastName) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.lastName) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.phone) }}
+            <label for="name">{{ form_label(form.phone) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.phone) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.cin) }}
+            <label for="name">{{ form_label(form.cin) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.cin) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.username) }}
+            <label for="name">{{ form_label(form.username) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.username) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.email) }}
+            <label for="name">{{ form_label(form.email) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.email) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.plainPassword.first) }}
+            <label for="name">{{ form_label(form.plainPassword.first) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.first) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.plainPassword.second) }}
+            <label for="name">{{ form_label(form.plainPassword.second) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.second) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.companyName) }}
+            <label for="name">{{ form_label(form.companyName) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyName) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.companyTaxIdentificationNumber) }}
+            <label for="name">{{ form_label(form.companyTaxIdentificationNumber) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyTaxIdentificationNumber) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.companyPhone) }}
+            <label for="name">{{ form_label(form.companyPhone) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyPhone) }}</div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-floating">
+            {{ form_widget(form.companyAddress) }}
+            <label for="name">{{ form_label(form.companyAddress) }}</label>
+        </div>
+        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyAddress) }}</div>
+    </div>
+    <div class="col-12">
+        <button class="btn btn-primary w-100 py-3" id="btn-save" type="submit">Inscrivez-vous </button>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,62 @@
+
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Message", "") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="row">
+  <div class="col-md-3">
+    <a href="{{ url('message_new' )}}" class="btn btn-primary btn-block mb-3">Nouveau</a>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">Les messages</h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body p-0">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item active">
+            <a href="{{ url('fos_message_inbox') }}" class="nav-link">
+              <i class="fas fa-inbox"></i> Reçus
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('fos_message_sent') }}" class="nav-link">
+              <i class="far fa-envelope"></i> Envoyés
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('fos_message_deleted') }}" class="nav-link">
+              <i class="far fa-trash-alt"></i> Supprimés
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- /.card-body -->
+    </div>
+  </div>
+  <!-- /.col -->
+  <div class="col-md-9">
+    {% block fos_message_content %}{% endblock %}
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+{% endblock %}
+{% block javascripts_surcharge %}
+<script>
+
+</script>
+{% endblock %}

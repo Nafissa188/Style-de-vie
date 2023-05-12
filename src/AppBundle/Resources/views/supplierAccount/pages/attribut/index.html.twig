@@ -1,0 +1,47 @@
+{% extends '@App/supplierAccount/layouts/base.html.twig' %}
+
+{% block title %} attributs {% endblock %}
+
+{% block header_content %} 
+     Liste des attributs
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="float:left" class="card-title">Liste des Attribut des produits</h3>
+                        <a style="float:right" data-title="Ajouter une attribut" data-url="{{ path('supplier_attribut_new') }}" href="#" class="addEditAttribut btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un attribut</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table data-url="{{ path('supplier_ajax_attribut_all') }}" id="attributs-datatable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    {% include 'AppBundle:supplierAccount:pages/attribut/partials/modal_add_edit.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    {% include 'AppBundle:supplierAccount:pages/attribut/partials/commen_script.html.twig' %}
+{% endblock %}

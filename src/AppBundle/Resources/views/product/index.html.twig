@@ -1,0 +1,91 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Liste des produits", "") }}
+{% endblock %}
+
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="float:left" class="card-title">Liste  des produits</h3>
+                        <a style="float:right" data-title="Ajouter un produit" href="{{ path('product_new') }}"  class=" btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un produit</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table data-url="{{ path('ajax_product_all') }}" id="products-datatable" class="projects table table-bordered table-striped dataTable dtr-inline table-responsive-lg">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th >type</th>
+                                    <th >Référence</th>
+                                    <th >Quantité</th>
+                                    <th >Prix</th>
+                                    <th >Categories</th>
+                                    <th >Disponible</th>
+                                    <th>Créer par</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    <script>
+        $(document).ready(function($){
+            var productsdata = $("#products-datatable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"},
+                "ajax": {
+                    url: $("#products-datatable").data('url') ,
+                    cache:false,
+                },
+                "columns": [
+                    { data: 'id' },
+                    { data: 'image' },
+                    { data: 'name' },
+                    { data: 'type' },
+                    { data: 'reference' },
+                    { data: 'quantity' },
+                    { data: 'price' },
+                    { data: 'categorys' },
+                    { data: 'enabled' },
+                    { data: 'created_by' },
+                    { data: 'action' }
+                ],
+            });
+
+            $(document).on('click', '.deleteProduct', function(event) {
+                event.preventDefault();
+                let url = $(this).data('url');
+                $.ajax({
+                    type:"DELETE",
+                    url: url,
+                    success: function(res){
+                        productsdata.ajax.reload();
+                    }
+                }); 
+            });
+        });
+    </script>
+{% endblock %}

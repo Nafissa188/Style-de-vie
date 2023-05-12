@@ -1,0 +1,36 @@
+<table class="table table-hover table-striped">
+  <tbody>
+  {% if threads %}
+    {% for thread in threads %}
+      <tr>
+        <td class="mailbox-name"><a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">{{thread.lastMessage.sender}}</a></td>
+        <td class="mailbox-subject"><b>{{ thread.subject }}</b> ({{ thread.messages|length }} messages)
+        </td>
+        <td class="mailbox-date">{{ thread.createdAt|date }}</td>
+        <td class="mailbox-date">{% if not fos_message_is_read(thread) %} <span class="badge badge-danger">Nouveau</span> {% endif %}</td>
+        <td class="mailbox-date">
+          {% if fos_message_can_delete_thread(thread) and suprime %}
+              {% if fos_message_deleted_by_participant(thread) %}
+                  {% set formAction %}{{ url('fos_message_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                  {% set submitValue %}{% trans from 'FOSMessageBundle' %}undelete{% endtrans %}{% endset %}
+              {% else %}
+                  {% set formAction %}{{ url('fos_message_thread_delete', {'threadId': thread.id}) }}{% endset %}
+                  {% set submitValue %}{% trans from 'FOSMessageBundle' %}delete{% endtrans %}{% endset %}
+              {% endif %}
+              <form action="{{ formAction }}" method="post">
+                      <button type="submit" class="btn btn-default btn-sm">{{submitValue}}</button>
+              </form>
+          {% endif %}
+         </td>
+      </tr>
+    {% endfor %}
+  {% else %}
+      <tr>
+          <td colspan="5">
+              Aucun message.
+          </td>
+      </tr>
+  {% endif %}
+  </tbody>
+</table>
+<!-- /.table -->

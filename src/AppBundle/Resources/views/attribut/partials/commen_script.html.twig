@@ -1,0 +1,91 @@
+    <script>
+        $(document).ready(function($){
+            var attributsdata = $("#attributs-datatable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"},
+                "ajax": {
+                    url: $("#attributs-datatable").data('url') ,
+                    cache:false,
+                },
+                "columns": [
+                    { data: 'id' },
+                    { data: 'name' },
+                    { data: 'type' },
+                    { data: 'created_by' },
+                    { data: 'action' }
+                ],
+            });
+
+            var attributvaluesdata = $("#attribut-values-datatable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"},
+                "ajax": {
+                    url: $("#attribut-values-datatable").data('url') ,
+                    cache:false,
+                },
+                "columns": [
+                    { data: 'id' },
+                    { data: 'value' },
+                    { data: 'created_by' },
+                    { data: 'action' }
+                ],
+            });
+
+            $(document).on('click', '.addEditAttribut , .addEditAttributValue', function() {
+                let url = $(this).data('url');
+                let title = $(this).data('title');
+                $.ajax({
+                    type:"GET",
+                    url: url,
+                    success: function(res){
+                        $('#ajaxAttributModel').html(title);
+                        $('#ajax-attribut-model').modal('show');
+                        $('#ajax-attribut-model #formArea').html(res.data);
+                        $('#ajax-attribut-model #formArea form').attr('action', url);
+                    }
+                }); 
+            });
+
+            $(document).on('submit', '#formArea form', function(event) {
+                event.preventDefault();
+                $("#btn-save").attr("disabled", true);
+                var form = $(this);
+                var formData = new FormData($('#formArea form')[0]);
+                var actionUrl = form.attr('action');
+                $.ajax({
+                    type:"POST",
+                    url: actionUrl,
+                    data: formData ,
+                    contentType: false,
+                    processData: false,
+                    success: function(res){
+                        $("#btn-save").attr("disabled", false);
+                        if(res.success){
+                            $("#ajax-attribut-model").modal('toggle');
+                            attributsdata.ajax.reload();
+                            attributvaluesdata.ajax.reload();
+                        }else{
+                            $('#ajax-attribut-model #formArea').html(res.data);
+                        }  
+                    }
+                });
+            });
+
+            $(document).on('click', '.deleteAttribut , .deleteAttributValue', function(event) {
+                event.preventDefault();
+                let url = $(this).data('url');
+                $.ajax({
+                    type:"DELETE",
+                    url: url,
+                    success: function(res){
+                        attributsdata.ajax.reload();
+                        attributvaluesdata.ajax.reload();
+                    }
+                }); 
+            });
+        });
+    </script>

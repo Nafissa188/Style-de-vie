@@ -1,0 +1,65 @@
+app_contact:
+    resource: "@AppBundle/Controller/ContactController.php"
+    type:     annotation
+
+app:
+    resource: '@AppBundle/Controller/BO/'
+    type: annotation
+    prefix:   /bo_style_vie
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /bo_style_vie
+
+sbs_adminlte:
+    resource: "@SbSAdminLTEBundle/Resources/config/routing.xml"
+    prefix:   /bo_style_vie
+
+sbs_adminlte_user_profile:
+    path: /bo_style_vie/user/profile
+    defaults: {_controller: AppBundle:Default:Profile}
+
+sbs_adminlte_user_logout:
+    path: /bo_style_vie/logout
+
+fos_user_profile_show:
+    path: /bo_style_vie/profile/
+    defaults: {_controller: AppBundle:Default:Profile}
+
+fos_user_registration_register:
+    path: /bo_style_vie/register/
+    defaults:
+       _controller: AppBundle:Default:index
+
+front: 
+    resource: '@AppBundle/Controller/Front/'
+    type: annotation
+    prefix:   /
+    
+supplier:
+    resource: '@AppBundle/Controller/Supplier/'
+    type: annotation
+    prefix:   /supplier_style_vie
+
+bachoffice:
+    path: /bo_style_vie
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /bo_style_vie/dashbord
+        permanent: true
+
+
+# API ROUTING
+routing_rest:
+    resource: routing_api_rest.yml
+
+nelmio_api_doc:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /style-vie-api/doc
+
+download_app:
+    path: /application/
+    defaults: {_controller: AppBundle:Default:Application}
+
+
+

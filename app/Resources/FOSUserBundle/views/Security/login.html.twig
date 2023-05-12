@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Style de vie</title>
+    <!--css custom file link-->
+    <link rel="stylesheet" href="style.css">
+    <!---Fontawesome CDN link----->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="{{ asset("bundles/app/css/login_style.css") }}"/>
+</head>
+<body>
+
+    <img class="wave" src="{{ asset('img/wave.png') }}">
+    <div class="container">
+      <div class="img">
+        <img src="{{ asset('img/bg.svg') }}">
+      </div>
+      <div class="login-content">
+        <form action="{{ path("fos_user_security_check") }}" method="post">
+          <img src="{{ asset('img/logo.png') }}">
+          <h2 class="title">Style de vie</h2>
+          <p style="margin-bottom: 20px;" class="login-box-msg">Connectez-vous!</p>
+          {% if error %}
+              <div class="alert alert-danger alert-dismissible">
+              <h5><i class="icon fas fa-ban"></i> {{ error.messageKey|trans(error.messageData, 'security') }}</h5>
+              </div>
+          {% endif %}
+          {% if csrf_token %}
+              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+          {% endif %}
+          <div class="input-div one">
+            <div class="i">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="div">
+              <h5>{{ 'security.login.username'|trans({},'FOSUserBundle') }}</h5>
+              <input type="text" id="username" name="_username"
+                     value="{{ last_username }}" required="required" autocomplete="username" class="input">
+            </div>
+          </div>
+          <div class="input-div pass">
+            <div class="i">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="div">
+              <h5>{{ 'security.login.password'|trans({},'FOSUserBundle') }}</h5>
+              <input type="password" id="password" name="_password"
+                     required="required"
+                     autocomplete="current-password" class="input">
+            </div>
+          </div>
+          <a href="{{ path("fos_user_resetting_request") }}">Mot de passe oublié?</a>
+          <!-- <input type="submit" class="btn" value="Login"> -->
+          <button class="btn" type="submit" id="_submit"
+                  name="_submit">{{ 'security.login.submit'|trans({},'FOSUserBundle') }}</button>
+        </form>
+      </div>
+    </div>
+<script>
+const inputs = document.querySelectorAll(".input");
+
+function addcl() {
+  let parent = this.parentNode.parentNode;
+  parent.classList.add("focus");
+}
+
+function remcl() {
+  let parent = this.parentNode.parentNode;
+  if (this.value == "") {
+    parent.classList.remove("focus");
+  }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener("focus", addcl);
+  input.addEventListener("blur", remcl);
+});
+
+if(document.getElementById('username').value){ document.getElementById('username').parentNode.parentNode.classList.add("focus");}
+if(document.getElementById('password').value){ document.getElementById('password').parentNode.parentNode.classList.add("focus");}
+</script>
+</body>
+</html>

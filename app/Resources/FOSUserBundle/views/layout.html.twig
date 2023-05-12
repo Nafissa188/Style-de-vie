@@ -1,0 +1,17 @@
+{% extends '@SbSAdminLTE/Layout/simple.html.twig' %}
+{% block title %}Style de Vie{% endblock %}
+{% block page_content %}
+    <div class="login-box">
+        {% block admin_lte_logo %}
+            <div class="login-logo">
+                <a href="{{ path('homepage') }}"><img class="logo" src="/img/logo.png"></a>
+                <p><b>Style de vie</b></p>
+            </div>
+        {% endblock %}
+        <div class="card">
+            <div class="card-body login-card-body">
+                {% block content_sub %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

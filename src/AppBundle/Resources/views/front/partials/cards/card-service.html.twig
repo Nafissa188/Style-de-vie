@@ -1,0 +1,20 @@
+<div class="service-item rounded h-100">
+    <div class="d-flex justify-content-between">
+        <div class="service-icon">
+            {% if icon is defined %}
+                <i class="fa {{icon}} fa-2x"></i>
+            {% endif %}
+        </div>
+        <a class="service-btn" href="">
+            <i class="fa fa-link fa-2x"></i>
+        </a>
+    </div>
+    <div class="p-5">
+        {% if  title is defined %}
+            <h5 class="mb-3">{{title}}</h5>
+        {% endif %}
+        {% if description is defined %}
+            <span>{{description}}</span>
+        {% endif %}
+    </div>
+</div>

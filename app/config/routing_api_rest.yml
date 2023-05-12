@@ -1,0 +1,9 @@
+px_api_user:
+    resource: "@ApiBundle/Controller/"
+    type:     annotation
+    defaults: {_format: json}
+    #prefix:   /style-vie-api/user
+    prefix:   /style-vie-api
+
+api_login_check:
+    path: /style-vie-api/login_check

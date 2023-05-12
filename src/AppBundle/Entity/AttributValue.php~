@@ -1,0 +1,190 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * AttributValue
+ *
+ * @ORM\Table(name="attribut_value")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\AttributValueRepository")
+ */
+class AttributValue
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=255)
+     */
+    private $value;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Attribut", inversedBy="children")
+     * @ORM\JoinColumn(name="attribut_id", onDelete="CASCADE", nullable=false)
+     */
+    private $attribut;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ProductAttribute", mappedBy="attributValues")
+     */
+    private $productAttributes;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="attributValues")
+     * @ORM\JoinColumn(name="user_id", onDelete="CASCADE", nullable=true)
+     */
+    private $user;
+
+
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set value.
+     *
+     * @param string $value
+     *
+     * @return AttributValue
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Get value.
+     *
+     * @return string
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * Set attribut.
+     *
+     * @param \AppBundle\Entity\Attribut $attribut
+     *
+     * @return AttributValue
+     */
+    public function setAttribut(\AppBundle\Entity\Attribut $attribut)
+    {
+        $this->attribut = $attribut;
+
+        return $this;
+    }
+
+    /**
+     * Get attribut.
+     *
+     * @return \AppBundle\Entity\Attribut
+     */
+    public function getAttribut()
+    {
+        return $this->attribut;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->attributvalueProductattributes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add attributvalueProductattribute.
+     *
+     * @param \AppBundle\Entity\AttributvalueProductattribute $attributvalueProductattribute
+     *
+     * @return AttributValue
+     */
+    public function addAttributvalueProductattribute(\AppBundle\Entity\AttributvalueProductattribute $attributvalueProductattribute)
+    {
+        $this->attributvalueProductattributes[] = $attributvalueProductattribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove attributvalueProductattribute.
+     *
+     * @param \AppBundle\Entity\AttributvalueProductattribute $attributvalueProductattribute
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeAttributvalueProductattribute(\AppBundle\Entity\AttributvalueProductattribute $attributvalueProductattribute)
+    {
+        return $this->attributvalueProductattributes->removeElement($attributvalueProductattribute);
+    }
+
+    /**
+     * Get attributvalueProductattributes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAttributvalueProductattributes()
+    {
+        return $this->attributvalueProductattributes;
+    }
+
+    /**
+     * Add productAttribute.
+     *
+     * @param \AppBundle\Entity\ProductAttribute $productAttribute
+     *
+     * @return AttributValue
+     */
+    public function addProductAttribute(\AppBundle\Entity\ProductAttribute $productAttribute)
+    {
+        $this->productAttributes[] = $productAttribute;
+
+        return $this;
+    }
+
+    /**
+     * Remove productAttribute.
+     *
+     * @param \AppBundle\Entity\ProductAttribute $productAttribute
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeProductAttribute(\AppBundle\Entity\ProductAttribute $productAttribute)
+    {
+        return $this->productAttributes->removeElement($productAttribute);
+    }
+
+    /**
+     * Get productAttributes.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProductAttributes()
+    {
+        return $this->productAttributes;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getValue();
+    }
+}

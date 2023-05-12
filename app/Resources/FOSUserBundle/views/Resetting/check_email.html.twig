@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Style de vie</title>
+    <!--css custom file link-->
+    <link rel="stylesheet" href="style.css">
+    <!---Fontawesome CDN link----->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+    <link rel="stylesheet" href="{{ asset("bundles/app/css/login_style.css") }}"/>
+</head>
+<body>
+
+    <img class="wave" src="https://i.postimg.cc/sDG8zyXM/wave.png">
+    <div class="container">
+      <div class="img">
+        <img src="https://svgshare.com/i/JcM.svg">
+      </div>
+      <div class="login-content">
+        <form class="fos_user_resetting_request">
+          <img src="https://svgshare.com/i/Jcf.svg">
+          <h2 class="title">Style de vie</h2>
+          <p style="margin-bottom: 20px;font-weight: 600;" class="login-box-msg">Mot de passe oublié?</p>
+          <p style="color: #444;">
+            {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime},'FOSUserBundle')|nl2br }}
+          </p>
+        </form>
+      </div>
+    </div>
+</body>
+</html>

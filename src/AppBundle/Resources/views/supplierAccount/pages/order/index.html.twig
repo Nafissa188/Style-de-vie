@@ -1,0 +1,121 @@
+{% extends '@App/supplierAccount/layouts/base.html.twig' %}
+
+{% block title %} Commandes {% endblock %}
+
+{% block header_content %} 
+     Mes commandes
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 style="float:left" class="card-title">Liste de mes commandes</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                            <thead>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th>Produit</th>
+                                    <th>Etat</th>
+                                    <th>Revendeur</th>
+                                    <th>Date</th>
+                                    <th>Date de livraison souhaitée</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a >OR9842</a></td>
+                                    <td>Call of Duty IV</td>
+                                    <td><span class="badge badge-success">Livrée</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR1848</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-warning">En attente</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f39c12" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR7429</a></td>
+                                    <td>iPhone 6 Plus</td>
+                                    <td><span class="badge badge-danger">Expediée</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f56954" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR7429</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-info">En cours</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00c0ef" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR1848</a></td>
+                                    <td>Samsung Smart TV</td>
+                                    <td><span class="badge badge-warning">En attente</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f39c12" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR7429</a></td>
+                                    <td>iPhone 6 Plus</td>
+                                    <td><span class="badge badge-danger">Expediée</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#f56954" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td><a  >OR9842</a></td>
+                                    <td>Call of Duty IV</td>
+                                    <td><span class="badge badge-success">Livrée</span></td>
+                                    <td>
+                                        <div class="sparkbar" data-color="#00a65a" data-height="20">Foulen foulen</div>
+                                    </td>
+                                    <td>12/03/2023</td>
+                                    <td>12/03/2023</td>
+                                    <td><a class="btn btn-success  "  href="{{path('supplier_order_show')}}"><i style="color:#fff" class=" fa fa-eye"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+{% endblock %}

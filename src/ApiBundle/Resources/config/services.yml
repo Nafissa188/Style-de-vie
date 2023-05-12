@@ -1,0 +1,60 @@
+parameters:
+    px_core_jwt_authentication.handler.authentication_success.class: ApiBundle\Security\Authentication\AuthenticationSuccessHandler
+    px_core_jwt_authentication.handler.authentication_failure.class: ApiBundle\Security\Authentication\AuthenticationFailureHandler
+
+services:
+    px_core_ws_service:
+        class: ApiBundle\Services\WServicesService
+        arguments:
+            - "@request_stack"
+            - "@form.factory"
+            - "@fos_rest.view_handler.default"
+            - %errors_codes_config%
+    px_api.user.service:
+        class: ApiBundle\Services\UserService
+        arguments:
+            - "@request_stack"
+            - "@doctrine.orm.entity_manager"
+            - "@px_user.mailer"
+            #- "@shadesoft_user_agent_parser.parser"
+
+    px_core_jwt_authentication.handler.authentication_success:
+        class: %px_core_jwt_authentication.handler.authentication_success.class%
+        tags:
+            - { name: monolog.logger, channel: security }
+        arguments:
+            - '@lexik_jwt_authentication.jwt_manager'
+            - '@px_api.user.service'
+            - '@px_core_ws_service'
+            - "@doctrine.orm.entity_manager"
+
+    px_core_jwt_authentication.handler.authentication_failure:
+        class: %px_core_jwt_authentication.handler.authentication_failure.class%
+        tags:
+            - { name: monolog.logger, channel: security }
+        arguments:
+            - '@event_dispatcher'
+            - %errors_codes_config%
+
+    fos_rest.view.exception_wrapper_handler:
+        class: ApiBundle\Handler\ApiExceptionWrapperHandler
+#        arguments: ["@px_core_ws_service", %errors_codes_config%]
+        arguments:
+            - "@px_core_ws_service"
+            - %errors_codes_config%
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+
+    px_user.mailer:
+        class: ApiBundle\Mailer\Mailer
+        arguments:
+           - '@mailer'
+           - '@router'
+           - '@templating'
+           - { base_fo_url: '%cors_allow_origin%', confirmation.template: '%fos_user.registration.confirmation.template%', resetting.template: '%fos_user.resetting.email.template%', from_email: { confirmation: '%fos_user.registration.confirmation.from_email%', resetting: '%fos_user.resetting.email.from_email%' } }
+
+
+    lexik_jwt_authentication.security.authentication.entry_point:
+        class: ApiBundle\Security\Http\EntryPoint\JWTEntryPoint
+        arguments:
+            - '@px_core_ws_service'

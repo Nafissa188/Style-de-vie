@@ -1,0 +1,26 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Error", "") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="error-page">
+  <h2 class="headline text-warning"> 404</h2>
+
+  <div class="error-content">
+    <h3><i class="fas fa-exclamation-triangle text-warning"></i> Oops! Une erreur est survenue.</h3>
+
+    <p>
+      merci de contacter le Superadministrateur
+    </p>
+
+  </div>
+  <!-- /.error-content -->
+</div>
+<!-- /.error-page -->
+
+{% endblock %}

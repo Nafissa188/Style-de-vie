@@ -1,0 +1,19 @@
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            {% if sub_title is defined  %}
+                <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">{{sub_title}}</div>
+            {% endif %}
+            {% if title is defined  %}
+                <h2 class="mb-5">{{title}}</h2>
+            {% endif %}
+        </div>
+        {% if testimonials is defined  %}
+            <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                {% for testimonial in testimonials %}
+                    {% include 'AppBundle:front:partials/cards/card-testimonial.html.twig' with testimonial %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

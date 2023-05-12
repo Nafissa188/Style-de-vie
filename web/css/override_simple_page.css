@@ -1,0 +1,34 @@
+
+.login-box, .register-box {
+    width: 600px;
+}
+.login-page .logo{
+  height: 120px;
+  width: auto;
+}
+
+.login-page{
+  min-height: inherit !important;
+}
+.login-page .card{
+  border-top: 3px solid #bf2f2f;
+}
+
+.login-page .btn-primary:hover , .login-page .btn-primary , .login-page .btn-primary:focus , .login-page .btn-primary:active {
+    color: #fff;
+    background-color: #082633;
+    border-color: #082633;
+}
+
+.login-page .footer-card{
+  margin-top: 20px;
+}
+
+.login-page .footer-card a , .login-page .footer-card a:focus , .login-page .footer-card a:hover , .login-page .footer-card a:active{
+  color: #082633;
+  text-decoration: underline;
+}
+
+.login-page .input-group-text .fas:before {
+    color: #bf2f2f;
+}

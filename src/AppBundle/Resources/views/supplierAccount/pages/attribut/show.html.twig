@@ -1,0 +1,60 @@
+{% extends '@App/supplierAccount/layouts/base.html.twig' %}
+
+{% block title %} attributs {% endblock %}
+
+{% block header_content %} 
+     Details d'un attribut
+{% endblock %}
+
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+             <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        
+                        <h3 class="profile-username text-center">{{attribut.name}}</h3>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <strong>Type</strong> <a class="float-right">{{attribut.type == "color" ? "Couleur" : "valeur"}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="float:left" class="card-title">Liste des valeurs</h3>
+                        <a style="float:right" data-title="Ajouter une valeur" data-url="{{ path('supplier_attribut_value_new', {'id': attribut.id}) }}" href="#" class="addEditAttributValue btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter une valeur</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table data-url="{{ path('supplier_ajax_attribut_values', { 'id': attribut.id }) }}" id="attribut-values-datatable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Valeur</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    {% include 'AppBundle:supplierAccount:pages/attribut/partials/modal_add_edit.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    {% include 'AppBundle:supplierAccount:pages/attribut/partials/commen_script.html.twig' %}
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends '@App/front/layouts/app.html.twig' %}
+
+{% block title %} Style de vie - Accueil {% endblock %}
+
+{% block hero %} 
+     {% include 'AppBundle:front:components/heros/home.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <!-- About Start -->
+    {% include 'AppBundle:front:modules/about.html.twig' with 
+        {
+            'sub_title' : 'Comment ça marche ? ',
+            'title' : 'Comment ça marche ? ',
+            'description' : 'Disposez d’une présence digitale à grande échelle via le plus grand réseau de revendeur en Tunisie.',
+            'cards' : [
+                {
+                    'icon': 'fa-user-tie',
+                    'title' : 'Réseau étendu',
+                    'description' : 'Vos produits déployés sur le plus grand réseau de commercialisation indépendant en Drop-Shipping. '
+                },
+                {
+                    'icon': 'fa-chart-line',
+                    'title' : 'Des Performances au top',
+                    'description' : 'Suivez en temps réel les performances de vos ventes, encaissements, état de votre stock en toute simplicité …'
+                }
+            ],
+            'btn' : {
+                'url': '#',
+                'text' : 'En savoir plus'
+            }
+        } 
+    %}
+    <!-- About End -->
+
+
+    <!-- Newsletter Start -->
+    {% include 'AppBundle:front:modules/newsletter.html.twig' with 
+        {
+            'title' : 'Prêt à commencer ? ',
+            'description' : 'Laissez votre adresse email pour vous informer à l’ouverture de la plateforme ',
+        } 
+    %}
+    <!-- Newsletter End -->
+
+
+    <!-- Service Start -->
+    {% include 'AppBundle:front:modules/service.html.twig' with 
+        {
+            'sub_title' : 'Nos services ',
+            'title' : 'Nous fournissons des solutions pour booster vos ventes en ligne ',
+            'cards' : [
+                {
+                    'icon': 'fa-user-tie',
+                    'title' : 'Réseau de vente performant ',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                },
+                {
+                    'icon': 'fa-chart-pie',
+                    'title' : 'Outil de planification performant ',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                },
+                {
+                    'icon': 'fa-chart-line',
+                    'title' : 'Pilotage en temps réel ',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                },
+                {
+                    'icon': 'fa-chart-area',
+                    'title' : 'Analyse financière transparente ',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                },
+                {
+                    'icon': 'fa-balance-scale',
+                    'title' : 'relation contractualisée',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                },
+                {
+                    'icon': 'fa-house-damage',
+                    'title' : 'Assurance Offerte ',
+                    'description' : 'Tempor erat elitr rebum at clita. Diam dolor ipsum amet eos erat ipsum lorem et sit sed stet lorem sit clita duo'
+                }
+            ]
+        }
+    %}
+    <!-- Service End -->
+
+
+    <!-- Features Start -->
+    {% include 'AppBundle:front:modules/features.html.twig' with 
+        {
+            'sub_title' : 'Fonctionnalités ',
+            'title' : 'Nous avons gagné la confiance de plus de 1500 fournisseurs : ',
+            'description' : 'Style de vie a su gagne la confiance de milliers de fournisseurs dans plusieurs univers produit autour d’un style de vie raffiné et haut de gamme. Un catalogue produit consolidé de plus 20000 références',
+            'cards' : [
+                {
+                    'icon': 'fa-cubes',
+                    'title' : 'Drop-Shipping ',
+                    'description' : 'Sécurisez votre stock chez vous, nous nous chargeons de la vente et de toute la logistique de collecte et de livraison '
+                },
+                {
+                    'icon': 'fa-percent',
+                    'title' : '10% de commissions',
+                    'description' : 'Transparence totale de la commissions prélevée en guise de frais de services. Pas de coûts cachés.'
+                },
+                {
+                    'icon': 'fa-award',
+                    'title' : 'Réseau certifié',
+                    'description' : 'Des revendeurs triés sur le volet constamment évalués. '
+                },
+                {
+                    'icon': 'fa-smile-beam',
+                    'title' : 'Clients 100% satisfaits',
+                    'description' : 'Nous nous efforçons d’atteindre une satisfaction totale des clients et du réseau. '
+                },
+                {
+                    'icon': 'fa-user-tie',
+                    'title' : 'Conseil Professionnel ',
+                    'description' : 'Nos conseillers e-commerce, Marketing Digital sont là pour vous aider et vous orienter pour plus de performances. '
+                },
+                {
+                    'icon': 'fa-headset',
+                    'title' : 'Support 24/7 ',
+                    'description' : 'Nos équipes du support sont à votre disposition 24/24 et 7jours / 7 '
+                },
+            ],
+            'btn' : {
+                'url': '#',
+                'text' : 'En savoir plus '
+            }
+        } 
+    %}
+    <!-- Features End -->
+
+
+    <!-- Client Start -->
+    {% include 'AppBundle:front:modules/client.html.twig' with 
+        {
+            'clients' : [
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-1.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-2.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-3.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-4.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-5.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-6.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-7.png'),
+                },
+                {
+                    'url': '#',
+                    'img' : asset('front/img/logo-8.png'),
+                },
+            ]
+        } 
+    %}
+    <!-- Client End -->
+
+
+    <!-- Testimonial Start -->
+    {% include 'AppBundle:front:modules/testimonial.html.twig' with 
+        {
+            'sub_title' : 'Témoignage Clients',
+            'title' : 'Ce que disent nos clients !',
+            'testimonials' : [
+                {
+                    'name': 'Client Name',
+                    'profession' : 'Profession',
+                    'img' : asset('front/img/testimonial-1.jpg'),
+                    'text' : 'Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam'
+                },
+                {
+                    'name': 'Client Name',
+                    'profession' : 'Profession',
+                    'img' : asset('front/img/testimonial-2.jpg'),
+                    'text' : 'Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam'
+                },
+                {
+                    'name': 'Client Name',
+                    'profession' : 'Profession',
+                    'img' : asset('front/img/testimonial-3.jpg'),
+                    'text' : 'Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam'
+                },
+                {
+                    'name': 'Client Name',
+                    'profession' : 'Profession',
+                    'img' : asset('front/img/testimonial-4.jpg'),
+                    'text' : 'Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam'
+                },
+            ]
+        } 
+    %}
+    <!-- Testimonial End -->
+
+
+    <!-- Team Start -->
+    {% include 'AppBundle:front:modules/team.html.twig' with 
+        {
+            'sub_title' : 'Notre equipe',
+            'title' : 'Rencontrez les membres de notre équipe',
+            'teams' : [
+                {
+                    'name': 'Full Name',
+                    'profession' : 'Designation',
+                    'img' : asset('front/img/team-1.jpg'),
+                    'fb_link' : 'https://facebook.com/',
+                    'ins_link' : 'https://www.instagram.com/',
+                    'ink_link' : 'linkedin.com',
+                },
+                {
+                    'name': 'Full Name',
+                    'profession' : 'Designation',
+                    'img' : asset('front/img/team-2.jpg'),
+                    'fb_link' : 'https://facebook.com/',
+                    'ins_link' : 'https://www.instagram.com/',
+                    'ink_link' : 'linkedin.com',
+                },
+                {
+                    'name': 'Full Name',
+                    'profession' : 'Designation',
+                    'img' : asset('front/img/team-3.jpg'),
+                    'fb_link' : 'https://facebook.com/',
+                    'ins_link' : 'https://www.instagram.com/',
+                    'ink_link' : 'linkedin.com',
+                },
+                {
+                    'name': 'Full Name',
+                    'profession' : 'Designation',
+                    'img' : asset('front/img/team-4.jpg'),
+                    'fb_link' : 'https://facebook.com/',
+                    'ins_link' : 'https://www.instagram.com/',
+                    'ink_link' : 'linkedin.com',
+                },
+                
+            ]
+            } 
+        %}
+    <!-- Team End -->
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'FOSMessageBundle::layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<div class="card card-primary card-outline">
+  <div class="card-header">
+    <h3 class="card-title">Les messages reçus</h3>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive mailbox-messages">
+      {% include 'FOSMessageBundle:Message:threads_list.html.twig' with {'threads': threads , 'suprime':true} %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

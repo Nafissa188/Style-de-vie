@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Version</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ version.id }}</td>
+            </tr>
+            <tr>
+                <th>Version</th>
+                <td>{{ version.version }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ version.file }}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if version.createdAt %}{{ version.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Last</th>
+                <td>{% if version.last %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('version_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('version_edit', { 'id': version.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

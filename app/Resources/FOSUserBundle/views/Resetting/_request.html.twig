@@ -1,0 +1,25 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content_sub %}
+  {% block reset_request_form %}
+      <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+          <div class="form-group input-group mb-3">
+              <input class="form-control" type="text" id="username" name="username" required="required"
+                     placeholder="{{ 'resetting.request.username'|trans }}"/>
+              <div class="input-group-append">
+                  <div class="input-group-text"><span class="fas fa-user"></span></div>
+              </div>
+          </div>
+          <div>
+              <button class="btn btn-primary btn-block btn-flat" type="submit">
+                  {{ 'resetting.request.submit'|trans }}
+              </button>
+          </div>
+      </form>
+  {% endblock %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/override_simple_page.css"/>
+{% endblock %}

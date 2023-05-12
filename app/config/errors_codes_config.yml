@@ -1,0 +1,35 @@
+parameters:
+    errors_codes_config:
+        401: "Email ou mot de passe incorrect."
+
+        1000: "Notre serveur est en cours de maintenance. Prière de réessayer ultérieurement."
+        1001: "Le paramètre id est invalide ou manquant."
+        1002: "Le paramètre type du compte est invalide ou manquant."
+        1003: "Le paramètre categoriesId est invalide ou manquant."
+        1004: "Le paramètre documentsId est invalide ou manquant."
+        1005: "Impossible de trouver le compte client."
+        1006: "Le paramètre id Utilisateur est invalide ou manquant."
+        1007: "Le paramètre code de confirmation de session est manquant."
+        1008: "Le paramètre email est invalide ou manquant."
+        1009: "Cet email existe déjà."
+        1010: "Cet nom d'utilisateur existe déjà."
+        1011: "Le paramètre civilité est invalide ou manquant."
+        1012: "Le paramètre nom est invalide ou manquant."
+        1013: "Le paramètre prénom est invalide ou manquant."
+        1014: "Le paramètre téléphone est invalide ou manquant."
+
+        1016: "Le paramètre confirmationToken est invalide ou manquant."
+        1017: "Les deux mots de passe ne sont pas identiques."
+
+        1020: "Le paramètre confirmationCode est invalide ou manquant."
+        1021: "Votre code de confirmation de session est invalide."
+
+
+        1048: "Le paramètre token est invalide ou manquant."
+
+
+        # User Agent
+        1601: "Le paramètre Agent ID est invalide ou manquant."
+        1602: "Impossible de trouver le compte agent."
+        1603: "Impossible de faire la correspondance avec le profil agent."
+        1604: "Le paramètre playerId est invalide ou manquant."

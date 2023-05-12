@@ -1,0 +1,13 @@
+<div class="d-flex align-items-center mb-3">
+    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+        {% if icon is defined %}
+            <i class="fa {{icon}} text-white"></i>
+        {% endif %}
+    </div>
+    {% if  title is defined %}
+        <h6 class="mb-0" >{{title}}</h6>
+    {% endif %}
+</div>
+{% if description is defined %}
+    <span>{{description}}</span>
+{% endif %}

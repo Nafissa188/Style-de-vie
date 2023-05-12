@@ -1,0 +1,240 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Dépôt de stockage", "Liste") }}
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 style="float:left" class="card-title">Liste des Dépôts de stockage</h3>
+              <a style="float:right" href="{{ path('storage_depot_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un Dépôt</a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Téléphone</th>
+                  <th>Adresse</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                  {% for storage_depot in storage_depots %}
+                  <tr>
+                    <td>{{ storage_depot.depotName }}</td>
+                    <td>{{ storage_depot.phone }}</td>
+                    <td>{{ storage_depot.address }}</td>
+                    <td class="text-right">
+                        <a class="btn btn-success " href="{{ path('storage_depot_edit', { 'id': storage_depot.id }) }}"><i style="color:#fff" class="fa fa-pen"></i></a>
+                        <a data-toggle="modal" data-target="#delete{{ storage_depot.id }}" class="btn btn-danger" ><i style="color:#fff" class="fa fa-trash"></i></a>
+                        <div class="modal fade" id="delete{{ storage_depot.id }}" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h4 class="modal-title">Attention</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <p style="text-align:center">Est ce que vous etes sur de supprimer {{ storage_depot.depotName }} </p>
+                              </div>
+                              <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                <a href="{{ path('storage_depot_delete', { 'id': storage_depot.id }) }}" class="btn btn-danger">Supprimer</a>
+                              </div>
+                            </div>
+                            <!-- /.modal-content -->
+                          </div>
+                          <!-- /.modal-dialog -->
+                        </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Nom</th>
+                  <th>Téléphone</th>
+                  <th>Adresse</th>
+                  <th>Actions</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+{% endblock %}
+{% block javascripts_surcharge %}
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": true,"ordering": true,
+      "buttons": ["copy", "csv", "excel", "pdf", "print"],
+      "language": {
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "lengthMenu": "Afficher _MENU_ éléments",
+                    "loadingRecords": "Chargement...",
+                    "processing": "Traitement...",
+                    "zeroRecords": "Aucun élément correspondant trouvé",
+                    "paginate": {
+                        "first": "Premier",
+                        "last": "Dernier",
+                        "previous": "Précédent",
+                        "next": "Suiv"
+                    },
+                    "aria": {
+                        "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "0": "Aucune ligne sélectionnée",
+                            "1": "1 ligne sélectionnée"
+                        },
+                        "1": "1 ligne selectionnée",
+                        "_": "%d lignes selectionnées",
+                        "cells": {
+                            "1": "1 cellule sélectionnée",
+                            "_": "%d cellules sélectionnées"
+                        },
+                        "columns": {
+                            "1": "1 colonne sélectionnée",
+                            "_": "%d colonnes sélectionnées"
+                        }
+                    },
+                    "autoFill": {
+                        "cancel": "Annuler",
+                        "fill": "Remplir toutes les cellules avec <i>%d<\/i>",
+                        "fillHorizontal": "Remplir les cellules horizontalement",
+                        "fillVertical": "Remplir les cellules verticalement",
+                        "info": "Exemple de remplissage automatique"
+                    },
+                    "searchBuilder": {
+                        "conditions": {
+                            "date": {
+                                "after": "Après le",
+                                "before": "Avant le",
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "equals": "Egal à",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide"
+                            },
+                            "number": {
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "equals": "Egal à",
+                                "gt": "Supérieur à",
+                                "gte": "Supérieur ou égal à",
+                                "lt": "Inférieur à",
+                                "lte": "Inférieur ou égal à",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide"
+                            },
+                            "string": {
+                                "contains": "Contient",
+                                "empty": "Vide",
+                                "endsWith": "Se termine par",
+                                "equals": "Egal à",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "startsWith": "Commence par"
+                            },
+                            "array": {
+                                "equals": "Egal à",
+                                "empty": "Vide",
+                                "contains": "Contient",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "without": "Sans"
+                            }
+                        },
+                        "add": "Ajouter une condition",
+                        "button": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "clearAll": "Effacer tout",
+                        "condition": "Condition",
+                        "data": "Donnée",
+                        "deleteTitle": "Supprimer la règle de filtrage",
+                        "logicAnd": "Et",
+                        "logicOr": "Ou",
+                        "title": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "value": "Valeur"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Effacer tout",
+                        "count": "{total}",
+                        "title": "Filtres actifs - %d",
+                        "collapse": {
+                            "0": "Volet de recherche",
+                            "_": "Volet de recherche (%d)"
+                        },
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Pas de volet de recherche",
+                        "loadMessage": "Chargement du volet de recherche..."
+                    },
+                    "buttons": {
+                        "copyKeys": "Appuyer sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier.",
+                        "collection": "Collection",
+                        "colvis": "Visibilité colonnes",
+                        "colvisRestore": "Rétablir visibilité",
+                        "copy": "Copier",
+                        "copySuccess": {
+                            "1": "1 ligne copiée dans le presse-papier",
+                            "_": "%ds lignes copiées dans le presse-papier"
+                        },
+                        "copyTitle": "Copier dans le presse-papier",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Afficher toutes les lignes",
+                            "1": "Afficher 1 ligne",
+                            "_": "Afficher %d lignes"
+                        },
+                        "pdf": "PDF",
+                        "print": "Imprimer"
+                    },
+                    "decimal": ",",
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ éléments",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 éléments",
+                    "infoFiltered": "(filtrés de _MAX_ éléments au total)",
+                    "infoThousands": ".",
+                    "search": "Rechercher:",
+                    "searchPlaceholder": "mot clés",
+                    "thousands": ".",
+                    "datetime": {
+                        "previous": "précédent",
+                        "next": "suivant",
+                        "hours": "heures",
+                        "minutes": "minutes",
+                        "seconds": "secondes"
+                    }
+          }
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+{% endblock %}

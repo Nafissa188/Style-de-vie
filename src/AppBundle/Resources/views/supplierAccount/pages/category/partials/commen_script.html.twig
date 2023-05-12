@@ -1,0 +1,71 @@
+<script>
+        $(document).ready(function($){
+            var categoriesdata = $("#categories-datatable").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"},
+                "ajax": {
+                    url: $("#categories-datatable").data('url') ,
+                    cache:false,
+                },
+                "columns": [
+                    { data: 'id' },
+                    { data: 'name' },
+                    { data: 'description' },
+                    { data: 'action' }
+                ],
+            });
+
+            $(document).on('click', '.addEditCategory', function() {
+                let url = $(this).data('url');
+                let title = $(this).data('title');
+                $.ajax({
+                    type:"GET",
+                    url: url,
+                    success: function(res){
+                        $('#ajaxCategoryModel').html(title);
+                        $('#ajax-category-model').modal('show');
+                        $('#ajax-category-model #formArea').html(res.data);
+                        $('#ajax-category-model #formArea form').attr('action', url);
+                    }
+                }); 
+            });
+
+            $(document).on('submit', '#formArea form', function(event) {
+                event.preventDefault();
+                $("#btn-save").attr("disabled", true);
+                var form = $(this);
+                var formData = new FormData($('#formArea form')[0]);
+                var actionUrl = form.attr('action');
+                $.ajax({
+                    type:"POST",
+                    url: actionUrl,
+                    data: formData ,
+                    contentType: false,
+                    processData: false,
+                    success: function(res){
+                        $("#btn-save").attr("disabled", false);
+                        if(res.success){
+                            $("#ajax-category-model").modal('toggle');
+                            categoriesdata.ajax.reload();
+                        }else{
+                            $('#ajax-category-model #formArea').html(res.data);
+                        }  
+                    }
+                });
+            });
+
+            $(document).on('click', '.deleteCategory', function(event) {
+                event.preventDefault();
+                let url = $(this).data('url');
+                $.ajax({
+                    type:"DELETE",
+                    url: url,
+                    success: function(res){
+                        categoriesdata.ajax.reload();
+                    }
+                }); 
+            });
+        });
+    </script>

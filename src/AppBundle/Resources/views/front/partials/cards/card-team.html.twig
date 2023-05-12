@@ -1,0 +1,22 @@
+<div class="team-item">
+    {% if name is defined  %}
+        <h5>{{name}}</h5>
+    {% endif %}
+    {% if profession is defined  %}
+        <p class="mb-4">{{profession}}</p>
+    {% endif %}
+    {% if img is defined  %}
+        <img class="img-fluid rounded-circle w-100 mb-4" src="{{ img }}">
+    {% endif %}
+    <div class="d-flex justify-content-center">
+        {% if fb_link is defined  %}
+            <a class="btn btn-square text-primary bg-white m-1" href="{{ fb_link }}"><i class="fab fa-facebook-f"></i></a>
+        {% endif %}
+        {% if ins_link is defined  %}
+            <a class="btn btn-square text-primary bg-white m-1" href="{{ ins_link }}"><i class="fab fa-twitter"></i></a>
+        {% endif %}
+        {% if ink_link is defined  %}
+            <a class="btn btn-square text-primary bg-white m-1" href="{{ ink_link }}"><i class="fab fa-linkedin-in"></i></a>
+        {% endif %}
+    </div>
+</div>

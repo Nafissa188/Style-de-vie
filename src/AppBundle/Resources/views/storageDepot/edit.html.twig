@@ -1,0 +1,134 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block stylesheets_surcharge %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+<script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
+{% endblock %}
+
+{% block page_header %}
+    {{ macros.page_header("Dépôt de stockage", "Modifier") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- /.col -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header p-2">
+          <h3 style="float:left" class="card-title">Modifier le Dépôt</h3>
+          <div class="spinner-border text-primary" role="status" style="display:none;float:right;" id="chargement">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            {{ form_start(form) }}
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.depotName) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.depotName) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.depotName) }}</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.phone) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.phone) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.phone) }}</div>
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.address) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.address) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.address) }}</div>
+                  </div>
+                </div>
+
+                <hr/>
+                <blockquote><h6><i class="fas fa-map-pin mr-1"></i>Position geographique</h6></blockquote>
+                <hr/>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div id="mapid" style="height: 200px;"></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group row">
+                      <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.altitude) }}</label>
+                      <div class="col-sm-10">
+                        {{ form_widget(form.altitude  , { 'attr': {'readonly': true} })  }}
+                        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.altitude) }}</div>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.longitude) }}</label>
+                      <div class="col-sm-10">
+                        {{ form_widget(form.longitude  , { 'attr': {'readonly': true} }) }}
+                        <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.longitude) }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-danger">Enregistrer</button>
+                  </div>
+                </div>
+
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts_surcharge %}
+
+
+<script>
+$( document ).ready(function() {
+  var altitude = $("#appbundle_storage_depot_altitude").val();
+  var longitude = $("#appbundle_storage_depot_longitude").val();
+  if(altitude == 0 || longitude == 0){
+    altitude = 36.8605988;
+    longitude = 10.2762502;
+    $("#appbundle_storage_depot_altitude").val("36.8605988");
+    $("#appbundle_storage_depot_longitude").val("10.2762502");
+  }
+  var mymap = L.map('mapid').setView([altitude, longitude], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'storage_depot',
+      accessToken: 'sk.eyJ1IjoibW9oYW1lZGdyaWluZSIsImEiOiJja251N2phazcwYTdiMnZrZ2psbjJrenN6In0.o2xcX3s2OK6Io7G2Z8chMQ'
+  }).addTo(mymap);
+
+  var marker = L.marker([altitude, longitude]).addTo(mymap).bindPopup("Position du bien ");
+  function onMapClick(e) {
+      marker.setLatLng(e.latlng).bindPopup(e.latlng.toString());
+      $("#appbundle_storage_depot_altitude").val(e.latlng.lat);
+      $("#appbundle_storage_depot_longitude").val(e.latlng.lng);
+  }
+
+  mymap.on('click', onMapClick);
+});
+</script>
+{% endblock %}

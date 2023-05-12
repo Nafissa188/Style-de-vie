@@ -1,0 +1,64 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Details d'un attribut", "") }}
+    
+{% endblock %}
+
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+             <div class="col-md-3">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        
+                        <h3 class="profile-username text-center">{{attribut.name}}</h3>
+                        <ul class="list-group list-group-unbordered mb-3">
+                            <li class="list-group-item">
+                                <strong>Type</strong> <a class="float-right">{{attribut.type == "color" ? "Couleur" : "valeur"}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <strong>Créer par</strong> <a class="float-right">{% if(attribut.user == null) %} ~ {% else %} {{attribut.user.email}} {% endif %}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="float:left" class="card-title">Liste des valeurs</h3>
+                        <a style="float:right" data-title="Ajouter une valeur" data-url="{{ path('attribut_value_new', {'id': attribut.id}) }}" href="#" class="addEditAttributValue btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter une valeur</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table data-url="{{ path('ajax_attribut_values', { 'id': attribut.id }) }}" id="attribut-values-datatable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Valeur</th>
+                                    <th>Créer par</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    {% include 'AppBundle:attribut:partials/modal_add_edit.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    {% include 'AppBundle:attribut:partials/commen_script.html.twig' %}
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Shortdescription</th>
+                <td>{{ product.shortDescription }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ product.description }}</td>
+            </tr>
+            <tr>
+                <th>Reference</th>
+                <td>{{ product.reference }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ product.type }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ product.quantity }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Metatitle</th>
+                <td>{{ product.metaTitle }}</td>
+            </tr>
+            <tr>
+                <th>Metadescription</th>
+                <td>{{ product.metaDescription }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ product.slug }}</td>
+            </tr>
+            <tr>
+                <th>Isbn</th>
+                <td>{{ product.isbn }}</td>
+            </tr>
+            <tr>
+                <th>Ean13</th>
+                <td>{{ product.ean13 }}</td>
+            </tr>
+            <tr>
+                <th>Upc</th>
+                <td>{{ product.upc }}</td>
+            </tr>
+            <tr>
+                <th>Mpn</th>
+                <td>{{ product.mpn }}</td>
+            </tr>
+            <tr>
+                <th>Enabled</th>
+                <td>{% if product.enabled %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('product_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Administrateurs", "Ajouter") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- /.col -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header p-2">
+          <strong>Ajouter un administrateur </strong>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            {{ form_start(form) }}
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.firstName) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.firstName) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.firstName) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.lastName) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.lastName) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.lastName) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.phone) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.phone) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.phone) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.cin) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.cin) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.cin) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="username" class="col-sm-2 col-form-label">{{ form_label(form.username) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.username) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.username) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.email) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.email) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.email) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.enabled) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.enabled) }}
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.plainPassword.first) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.plainPassword.first) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.first) }}</div>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.plainPassword.second) }}</label>
+                  <div class="col-sm-10">
+                    {{ form_widget(form.plainPassword.second) }}
+                    <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.second) }}</div>
+                  </div>
+                </div>
+
+
+                <div class="form-group row">
+                  <div class="offset-sm-2 col-sm-10">
+                    <button type="submit" class="btn btn-danger">Submit</button>
+                  </div>
+                </div>
+
+            {{ form_end(form) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts_surcharge %}
+<script>
+$(function () {
+  //Initialize Select2 Elements
+  $('.select2').select2()
+
+  //Initialize Select2 Elements
+  $('.select2bs4').select2({
+    theme: 'bootstrap4'
+  })
+})
+</script>
+{% endblock %}

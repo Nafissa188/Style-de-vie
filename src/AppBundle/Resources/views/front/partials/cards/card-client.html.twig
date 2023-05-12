@@ -1,0 +1,5 @@
+<a {% if cta is defined %} href="{{cta}}" {% endif %} >
+    {% if img is defined %}
+        <img class="img-fluid" src="{{ img }}" alt="">
+    {% endif %}
+</a>

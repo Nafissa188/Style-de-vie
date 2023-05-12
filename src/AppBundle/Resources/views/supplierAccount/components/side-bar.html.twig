@@ -1,0 +1,65 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ path('supplier_dashbord') }}">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <img src="{{asset('img/logo.png')}}" style="width:35px" alt="Logo">
+        </div>
+        <div class="sidebar-brand-text mx-3">Style de vie</div>
+    </a>
+
+    <hr class="sidebar-divider my-0">
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_dashbord') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Mon catalogue 
+    </div>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_product_index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Produits</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_category_index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Catégories</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_attribut_index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Attributs</span></a>
+    </li>
+    
+
+    <hr class="sidebar-divider">
+
+    <div class="sidebar-heading">
+        Performances
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_order_index') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Commandes</span></a>
+    </li>
+
+     <li class="nav-item">
+        <a class="nav-link" href="{{ path('supplier_dashbord') }}">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Mes revenues </span></a>
+    </li>
+
+    
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>

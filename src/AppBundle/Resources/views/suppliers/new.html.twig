@@ -1,0 +1,252 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block stylesheets_surcharge %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+<script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
+{% endblock %}
+
+{% block page_header %}
+    {{ macros.page_header("Fournisseurs", "Ajouter") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- /.col -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header p-2">
+          <strong>Ajouter un fournisseur </strong>
+        </div><!-- /.card-header -->
+        {{ form_start(form) }}
+        <div class="card-body">
+          <div class="tab-content">
+              <blockquote><h6><i class="fas fa-user mr-1"></i>Fournisseur</h6></blockquote>
+              <hr/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.firstName) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.firstName) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.firstName) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.lastName) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.lastName) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.lastName) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.phone) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.phone) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.phone) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.cin) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.cin) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.cin) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="username" class="col-md-4 col-form-label">{{ form_label(form.username) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.username) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.username) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.email) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.email) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.email) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.plainPassword.first) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.plainPassword.first) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.first) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.plainPassword.second) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.plainPassword.second) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.plainPassword.second) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <hr/>
+              <blockquote><h6><i class="fas fa-industry mr-1"></i>Entreprise</h6></blockquote>
+              <hr/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.companyName) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.companyName) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyName) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.companyTaxIdentificationNumber) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.companyTaxIdentificationNumber) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyTaxIdentificationNumber) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.companyPhone) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.companyPhone) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyPhone) }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">{{ form_label(form.companyAddress) }}</label>
+                    <div class="col-md-8">
+                      {{ form_widget(form.companyAddress) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.companyAddress) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr/>
+              <blockquote><h6><i class="fas fa-map-pin mr-1"></i>Position geographique</h6></blockquote>
+              <hr/>
+              <div class="row">
+                <div class="col-md-6">
+                  <div id="mapid" style="height: 200px;"></div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.altitude) }}</label>
+                    <div class="col-sm-10">
+                      {{ form_widget(form.altitude  , { 'attr': {'readonly': true} })  }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.altitude) }}</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="title" class="col-sm-2 col-form-label">{{ form_label(form.longitude) }}</label>
+                    <div class="col-sm-10">
+                      {{ form_widget(form.longitude  , { 'attr': {'readonly': true} }) }}
+                      <div class="help-block with-errors" style="font-weight:bold;color:#ff0000;">{{ form_errors(form.longitude) }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label for="email" class="col-sm-2 col-form-label">{{ form_label(form.enabled) }}</label>
+                <div class="col-sm-10">
+                  {{ form_widget(form.enabled) }}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <div class="col-sm-12 text-right">
+                  <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts_surcharge %}
+<script>
+$(function () {
+  //Initialize Select2 Elements
+  $('.select2').select2()
+
+  //Initialize Select2 Elements
+  $('.select2bs4').select2({
+    theme: 'bootstrap4'
+  })
+})
+</script>
+<script>
+$( document ).ready(function() {
+  var altitude = $("#appbundle_supplier_altitude").val();
+  var longitude = $("#appbundle_supplier_longitude").val();
+  if(altitude == 0 || longitude == 0){
+    altitude = 36.8605988;
+    longitude = 10.2762502;
+    $("#appbundle_supplier_altitude").val("36.8605988");
+    $("#appbundle_supplier_longitude").val("10.2762502");
+  }
+  var mymap = L.map('mapid').setView([altitude, longitude], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'supplier',
+      accessToken: 'sk.eyJ1IjoibW9oYW1lZGdyaWluZSIsImEiOiJja251N2phazcwYTdiMnZrZ2psbjJrenN6In0.o2xcX3s2OK6Io7G2Z8chMQ'
+  }).addTo(mymap);
+
+  var marker = L.marker([altitude, longitude]).addTo(mymap).bindPopup("Position du bien ");
+  function onMapClick(e) {
+      marker.setLatLng(e.latlng).bindPopup(e.latlng.toString());
+      $("#appbundle_supplier_altitude").val(e.latlng.lat);
+      $("#appbundle_supplier_longitude").val(e.latlng.lng);
+  }
+
+  mymap.on('click', onMapClick);
+});
+</script>
+{% endblock %}

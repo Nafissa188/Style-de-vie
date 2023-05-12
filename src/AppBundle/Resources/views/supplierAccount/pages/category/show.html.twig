@@ -1,0 +1,72 @@
+{% extends '@App/supplierAccount/layouts/base.html.twig' %}
+
+{% block title %} categorie {% endblock %}
+
+{% block header_content %} 
+     Details d'une categorie
+{% endblock %}
+
+
+
+{% block content %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('supplier_category_index') }}">Principale</a></li>
+            {% for parent in parents %}
+                <li class="breadcrumb-item"><a href="{{ path('supplier_category_show', { 'id': parent.id }) }}">{{parent.name}}</a></li>
+            {% endfor %}
+            <li class="breadcrumb-item active" aria-current="page">{{category.name}}</li>
+        </ol>
+    </nav>
+    <div class="row">
+            <div class="col-md-3">
+            <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+                    
+                    <h3 class="profile-username text-center">{{category.name}}</h3>
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <strong>Description</strong> <a class="float-right">{{category.description}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Parent</strong> <a class="float-right"> {% if(category.parent == null) %} Principale {% else %} {{category.parent.name}} {% endif %}  </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="card">
+                <div class="card-header">
+                    <h3 style="float:left" class="card-title">Liste des sous-categorie</h3>
+                    <a style="float:right" data-title="Ajouter une categorie" data-url="{{ path('supplier_category_new', { 'parent': category.id }) }}" href="#" class="addEditCategory btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter une sous-catégorie</a>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table data-url="{{ path('supplier_ajax_category_all') }}?parent={{category.id}}" id="categories-datatable" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th >Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    {% include 'AppBundle:supplierAccount:pages/category/partials/modal_add_edit.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    {% include 'AppBundle:supplierAccount:pages/category/partials/commen_script.html.twig' %}
+{% endblock %}

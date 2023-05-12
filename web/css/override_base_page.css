@@ -1,0 +1,25 @@
+.details_minicipalite td, .details_minicipalite th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link {
+    background-color: inherit;
+    color: #c2c7d0;
+
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item:hover>.nav-link, .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link:focus , .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: rgba(255,255,255,.1);
+    color: #fff;
+    box-shadow: inherit;
+}
+
+.select2-container .select2-selection--single {
+    height: auto;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 100%;
+}

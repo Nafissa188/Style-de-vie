@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Versions list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Version</th>
+                <th>File</th>
+                <th>Createdat</th>
+                <th>Last</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for version in versions %}
+            <tr>
+                <td><a href="{{ path('version_show', { 'id': version.id }) }}">{{ version.id }}</a></td>
+                <td>{{ version.version }}</td>
+                <td>{{ version.file }}</td>
+                <td>{% if version.createdAt %}{{ version.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if version.last %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('version_show', { 'id': version.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('version_edit', { 'id': version.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('version_new') }}">Create a new version</a>
+        </li>
+    </ul>
+{% endblock %}

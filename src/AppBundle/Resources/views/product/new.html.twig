@@ -1,0 +1,67 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block stylesheets_surcharge %}
+{% endblock %}
+
+{% block page_header %}
+    {{ macros.page_header("Produits", "Ajouter") }}
+{% endblock %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- /.col -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header p-2">
+          <strong>Ajouter un produit </strong>
+        </div><!-- /.card-header -->
+        {{ form_start(form) }}
+        <div class="card-body">
+          <div class="tab-content">
+              {{ form_widget(form) }}
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12 text-right">
+                  <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    <script>
+        $(document).ready(function($){
+            function getType(){
+                if($("#appbundle_product_type").val() == 1){
+                    $("#appbundle_product_reference").parent().show();
+                    $("#appbundle_product_quantity").parent().show();
+                    $("#appbundle_product_price").parent().show();
+                }else{
+                    $("#appbundle_product_reference").parent().hide();
+                    $("#appbundle_product_quantity").parent().hide();
+                    $("#appbundle_product_price").parent().hide();
+                }
+            }
+            getType();
+            $("#appbundle_product_type").change(function(){
+                getType();
+            });
+        });
+    </script>
+{% endblock %}
+

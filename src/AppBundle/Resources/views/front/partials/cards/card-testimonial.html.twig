@@ -1,0 +1,19 @@
+<div class="testimonial-item rounded p-4">
+    <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+    {% if text is defined  %}
+        <p>{{text}}</p>
+    {% endif %}
+    <div class="d-flex align-items-center">
+        {% if img is defined  %}
+            <img class="img-fluid flex-shrink-0 rounded-circle" src="{{ img }}">
+        {% endif %}
+        <div class="ps-3">
+            {% if name is defined  %}
+                <h6 class="mb-1">{{name}}</h6>
+            {% endif %}
+            {% if profession is defined  %}
+                <small>{{profession}}</small>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Liste des attributs", "") }}
+{% endblock %}
+
+{% block page_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 style="float:left" class="card-title">Liste des Attribut des produits</h3>
+                        <a style="float:right" data-title="Ajouter une attribut" data-url="{{ path('attribut_new') }}" href="#" class="addEditAttribut btn btn-primary"><i class="fas fa-plus-circle"></i> Ajouter un attribut</a>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table data-url="{{ path('ajax_attribut_all') }}" id="attributs-datatable" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Créer par</th>
+                                    <th >Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    {% include 'AppBundle:attribut:partials/modal_add_edit.html.twig' %}
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+    {% include 'AppBundle:attribut:partials/commen_script.html.twig' %}
+{% endblock %}

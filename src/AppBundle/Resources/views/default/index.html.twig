@@ -1,0 +1,177 @@
+{% extends '@App/base.html.twig' %}
+
+{% import "@SbSAdminLTE/Layout/main_macros.html.twig" as macros %}
+
+{% block page_header %}
+    {{ macros.page_header("Tableau de bord", "") }}
+{% endblock %}
+
+{% block title %}Style de Vie{% endblock %}
+
+{% block stylesheets_surcharge %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+<script src="https://unpkg.com/leaflet-draw@1.0.2/dist/leaflet.draw.js"></script>
+
+<link rel="stylesheet" href="{{asset('bundles/sbsadminlte/plugins/jqvmap/jqvmap.min.css')}}">
+<!-- overlayScrollbars -->
+<link rel="stylesheet" href="{{asset('bundles/sbsadminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="{{asset('bundles/sbsadminlte/plugins/daterangepicker/daterangepicker.css')}}">
+<!-- summernote -->
+<link rel="stylesheet" href="{{asset('bundles/sbsadminlte/plugins/summernote/summernote-bs4.min.css')}}">
+{% endblock %}
+
+{% block page_content %}
+
+<div class="container-fluid">
+
+  <!-- Main row -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">
+            <i class="fas fa-map mr-1"></i>
+            Cartoghaphie
+          </h3>
+        </div><!-- /.card-header -->
+        <div class="card-body">
+          <div class="tab-content">
+            <div class="row" style="margin-bottom: 20px;">
+              <div class="col-md-6">
+                <img src="{{ asset('img/location-pointer.png') }}"> Dépôt
+              </div>
+              <div class="col-md-6">
+                <img src="{{ asset('img/location-pointer-g.png') }}"> Fournisseur
+              </div>
+            </div>
+            {% for storageDepot in storageDepots %}
+              <input type="hidden" id="{{storageDepot.id}}" class="recc"
+              typee="Dépôt"
+              name="{{storageDepot.depotName}}"
+              adresse="{{storageDepot.address}}"
+              phone="{{storageDepot.phone}}"
+              altitude="{{storageDepot.altitude}}"
+              longitude="{{storageDepot.longitude}}" >
+            {% endfor %}
+            {% for supplier in suppliers %}
+              <input type="hidden" id="{{supplier.id}}" class="recc"
+              typee="Fournisseur"
+              name="{{supplier.companyName}}"
+              adresse="{{supplier.companyAddress}}"
+              phone="{{supplier.companyPhone}}"
+              altitude="{{supplier.altitude}}"
+              longitude="{{supplier.longitude}}" >
+            {% endfor %}
+
+            {# {% for recensement in recensements %}
+              <input type="hidden" id="{{recensement.id}}" class="recc"
+              typee="{% if recensement.type == 0 %} Habitation {% elseif recensement.type == 1  %} Professionel {% else %} Terrain  {% endif %} "
+              date="{{recensement.createdAt|date}}"
+              agent="{% if recensement.createdBy %}{{recensement.createdBy.firstName}} {{recensement.createdBy.lastName}} ( {{recensement.createdBy.email}} ){% endif %}"
+              adresse="{{recensement.num}} {{recensement.rue}}"
+              municipalite="{{recensement.municipalite.id}}"
+              altitude="{{recensement.altitude}}"
+              longitude="{{recensement.longitude}}" >
+            {% endfor %} #}
+            <div id="mapid" style="height: 400px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /.container-fluid -->
+
+{% endblock %}
+
+{% block javascripts_surcharge %}
+
+<script src="{{asset('bundles/sbsadminlte/plugins/chart.js/Chart.min.js')}}"></script>
+<!-- jQuery -->
+<script src="{{asset('bundles/sbsadminlte/plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{asset('bundles/sbsadminlte/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('bundles/sbsadminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- ChartJS -->
+<script src="{{asset('bundles/sbsadminlte/plugins/chart.js/Chart.min.js')}}"></script>
+<!-- Sparkline -->
+<script src="{{asset('bundles/sbsadminlte/plugins/sparklines/sparkline.js')}}"></script>
+<!-- JQVMap -->
+<!-- jQuery Knob Chart -->
+<script src="{{asset('bundles/sbsadminlte/plugins/jquery-knob/jquery.knob.min.js')}}"></script>
+<!-- daterangepicker -->
+<script src="{{asset('bundles/sbsadminlte/plugins/moment/moment.min.js')}}"></script>
+<script src="{{asset('bundles/sbsadminlte/plugins/daterangepicker/daterangepicker.js')}}"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{asset('bundles/sbsadminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+<!-- Summernote -->
+<script src="{{asset('bundles/sbsadminlte/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!-- overlayScrollbars -->
+<script src="{{asset('bundles/sbsadminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+
+
+<script src="{{asset('js/demo.js')}}"></script>
+<script src="{{asset('js/dashboard.js')}}"></script>
+
+<script>
+$( document ).ready(function() {
+
+  /*var mymap = L.map('mapid').setView([$("#municipalite option:selected" ).attr("altitude"), $("#municipalite option:selected" ).attr("longitude")], 11);
+  $( "#municipalite" ).change(function() {
+    mymap.setView([$( "#municipalite option:selected" ).attr("altitude") , $( "#municipalite option:selected" ).attr("longitude")], 11);
+  });*/
+  var mymap = L.map('mapid').setView([34.161818161230386, 8.986816406250002], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'storageDepots',
+      accessToken: 'sk.eyJ1IjoibW9oYW1lZGdyaWluZSIsImEiOiJja251N2phazcwYTdiMnZrZ2psbjJrenN6In0.o2xcX3s2OK6Io7G2Z8chMQ'
+  }).addTo(mymap);
+  /* custom marker icon */
+  let customIcon = {
+   iconUrl:"{{ asset('img/location-pointer.png') }}",
+   iconSize:[32,32]
+  }
+  let myIcon = L.icon(customIcon);
+  let iconOptions = {
+   title:"Depot name",
+   draggable:false,
+   icon:myIcon
+  }
+  /* End custom marker icon */
+  /* custom marker icon */
+  let customIconSupplier = {
+   iconUrl:"{{ asset('img/location-pointer-g.png') }}",
+   iconSize:[32,32]
+  }
+  let myIconSupplier = L.icon(customIconSupplier);
+  let iconOptionsSupplier = {
+   title:"Depot name",
+   draggable:false,
+   icon:myIconSupplier
+  }
+  /* End custom marker icon */
+
+  $( ".recc" ).each(function( index ) {
+    if($( this ).attr("typee") == "Fournisseur"){
+      iconOptions = iconOptionsSupplier;
+    }
+    L.marker([$( this ).attr("altitude"),$( this ).attr("longitude")],iconOptions).addTo(mymap).bindPopup("<strong>Type : </strong>  "+$( this ).attr("typee")+"<br><strong>Adresse : </strong>  "+$( this ).attr("adresse")+"<br> <strong>Téléphone : </strong>  "+$( this ).attr("phone"));
+  });
+
+});
+</script>
+
+{% endblock %}

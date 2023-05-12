@@ -1,0 +1,82 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:         [ROLE_ADMIN ROLE_USER ]
+        ROLE_SUPPLIERS:     [ROLE_SUPPLIERS ]
+        ROLE_RESELLER:      [ROLE_RESELLER ]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/(bo_style_vie|supplier_style_vie|)
+            user_checker: security.user_checker
+            form_login:
+                login_path:     fos_user_security_login
+                check_path:     fos_user_security_check
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                #default_target_path: /bo_style_vie/
+                use_referer:         false
+                success_handler:     login_success_handler
+
+            #logout:       true
+            logout:
+                path:           fos_user_security_logout
+                target:         /bo_style_vie/login
+            anonymous:    true
+
+            access_denied_handler: AppBundle\Security\AccessDeniedHandler
+
+        api_login:
+            pattern:  ^/style-vie-api/user/login
+            stateless: true
+            anonymous: true
+            form_login:
+                check_path:               /style-vie-api/user/login
+                success_handler:          px_core_jwt_authentication.handler.authentication_success
+                failure_handler:          px_core_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+                username_parameter:       email
+                password_parameter:       password
+
+        api:
+            pattern:   ^/style-vie-api
+            stateless: true
+            lexik_jwt:
+                authorization_header: # check token in Authorization Header
+                    enabled: true
+                    prefix:  token
+                throw_exceptions:        true     # When an authentication failure occurs, return a 401 response immediately
+                create_entry_point:      true      # When no authentication details are provided, create a default entry point that returns a 401 response
+                authentication_provider: lexik_jwt_authentication.security.authentication.provider
+            anonymous: true
+
+    access_control:
+        - { path: ^/login$,                              role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register,                            role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting,                           role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bo_style_vie/login,                  role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bo_style_vie/resetting,              role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/bo_style_vie/,                       role: ROLE_ADMIN }
+        - { path: ^/supplier_style_vie/,                  role: ROLE_SUPPLIERS }
+
+        - { path: ^/style-vie-api/doc,                        role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/style-vie-api/user/all$,                  role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/style-vie-api/user/login$,                role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/style-vie-api/user/password/reset,        role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/style-vie-api/user/password/change,       role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/style-vie-api/user/edit-password,         role: IS_AUTHENTICATED_ANONYMOUSLY } #IS_AUTHENTICATED_FULLY
+        - { path: ^/style-vie-api/user/profile,               role: IS_AUTHENTICATED_ANONYMOUSLY } #IS_AUTHENTICATED_FULLY
+        - { path: ^/style-vie-api/user/reset-password,        role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -1,0 +1,33 @@
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-5 wow fadeInUp" data-wow-delay="0.1s">
+                {% if sub_title is defined  %}
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">{{sub_title}}</div>
+                {% endif %}
+                
+                {% if title is defined  %}
+                    <h2 class="mb-4">{{title}}</h2>
+                {% endif %}
+                {% if description is defined  %}
+                    <p >{{description}}</p>
+                {% endif %}
+                {% if btn is defined  %}
+                    {% include 'AppBundle:front:partials/btn.html.twig' with btn %}
+                {% endif %}
+            </div>
+            
+            <div class="col-lg-7">
+                {% if cards is defined  %}
+                    <div class="row g-5">
+                        {% for card in cards %}
+                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+                                {% include 'AppBundle:front:partials/cards/card-feature.html.twig' with card %}
+                            </div>
+                        {% endfor %}                   
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
